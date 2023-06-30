@@ -161,48 +161,57 @@ def test(args):
 
 if __name__ == '__main__':
 	
-	parser = argparse.ArgumentParser(description='Point Cloud Recognition')
-	parser.add_argument('--exp_name', type=str, default='exp', metavar='N',
-						help='Name of the experiment')
-	parser.add_argument('--dataset', type=str, default='modelnet40', metavar='N',
-						choices=['modelnet40'])
-	parser.add_argument('--batch_size', type=int, default=10, metavar='batch_size',
-						help='Size of batch)')
-	parser.add_argument('--test_batch_size', type=int, default=10, metavar='batch_size',
-						help='Size of batch)')
-	parser.add_argument('--epochs', type=int, default=100, metavar='N',
-						help='number of episode to train ')
-	parser.add_argument('--use_sgd', type=bool, default=False,
-						help='Use SGD')
-	parser.add_argument('--lr', type=float, default=0.0001, metavar='LR',
-						help='learning rate (default: 0.001, 0.1 if using sgd)')
-	parser.add_argument('--momentum', type=float, default=0.9, metavar='M',
-						help='SGD momentum (default: 0.9)')
-	parser.add_argument('--no_cuda', type=bool, default=False,
-						help='enables CUDA training')
-	parser.add_argument('--seed', type=int, default=42, metavar='S',
-						help='random seed (default: 42)')
-	parser.add_argument('--eval', type=bool,  default=False,
-						help='evaluate the model')
-	parser.add_argument('--dropout', type=float, default=0.5,
-						help='dropout rate')
-	parser.add_argument('--emb_dims', type=int, default=128, metavar='N',
-						help='Dimension of embeddings')
-	parser.add_argument('--nf', type=int, default=8, metavar='N',
-						help='Dimension of IMnet nf')
-	parser.add_argument('--k', type=int, default=15, metavar='N',
-						help='Num of nearest neighbors to use')
-	
-	parser.add_argument('--data_directory', type=str,
-						help="data directory")
-	parser.add_argument('--model_type', type=str, default = 'autoencoder',
-						help="model type autoencoder or only encoder")
-	parser.add_argument('--mse_weight', type=float, default=0.01)
-	parser.add_argument('--template', type=str, default = "template")
-	parser.add_argument('--extention', type=str, default=".ply")
-	parser.add_argument('--gpuid', type=int, default=0)
-	parser.add_argument('--vae_mse_weight', type=float, default=10)
-	parser.add_argument('--latent_dim', type = int, default = 64)
+	    parser = argparse.ArgumentParser(description='Mesh2SSM: From surface meshes to statistical shape models of anatomy')
+    parser.add_argument('--exp_name', type=str, default='exp', metavar='N',
+                        help='Name of the experiment')
+    parser.add_argument('--dataset', type=str, default='modelnet40', metavar='N')
+    parser.add_argument('--batch_size', type=int, default=10, metavar='batch_size',
+                        help='Size of batch)')
+    parser.add_argument('--test_batch_size', type=int, default=10, metavar='batch_size',
+                        help='Size of batch)')
+    parser.add_argument('--epochs', type=int, default=100, metavar='N',
+                        help='number of epochs to train ')
+    parser.add_argument('--use_sgd', type=bool, default=False,
+                        help='Use SGD')
+    parser.add_argument('--lr', type=float, default=0.0001, metavar='LR',
+                        help='learning rate (default: 0.001, 0.1 if using sgd)')
+    parser.add_argument('--vae_lr', type=float, default=0.001, metavar='LR',
+                        help='learning rate (default: 0.001, 0.1 if using sgd)')
+    parser.add_argument('--momentum', type=float, default=0.9, metavar='M',
+                        help='SGD momentum (default: 0.9)')
+    parser.add_argument('--no_cuda', type=bool, default=False,
+                        help='enables CUDA training')
+    parser.add_argument('--seed', type=int, default=42, metavar='S',
+                        help='random seed (default: 42)')
+    parser.add_argument('--eval', type=bool,  default=False,
+                        help='evaluate the model')
+    parser.add_argument('--dropout', type=float, default=0.5,
+                        help='dropout rate')
+    parser.add_argument('--emb_dims', type=int, default=128, metavar='N',
+                        help='Dimension of embeddings of the mesh autoencoder for correspondence generation')
+    parser.add_argument('--nf', type=int, default=8, metavar='N',
+                        help='Dimension of IMnet nf')
+    parser.add_argument('--k', type=int, default=10, metavar='N',
+                        help='Num of nearest neighbors to use')
+    parser.add_argument('--model_path', type=str, default='', metavar='N',
+                        help='Pretrained model path')
+    parser.add_argument('--data_directory', type=str,
+                        help="data directory")
+    parser.add_argument('--model_type', type=str, default = 'autoencoder',
+                        help="model type autoencoder or only encoder")
+    parser.add_argument('--mse_weight', type=float, default=0.01, 
+                        help="weight for the mesh autoencoder(correspondence generation) mse reconstruction term in the loss")
+    parser.add_argument('--template', type=str, default = "template",
+    					help="name of the template file")
+    parser.add_argument('--extention', type=str, default=".ply",
+                        help="extention of the mesh files in the data directory")
+    parser.add_argument('--gpuid', type=int, default=0,
+                        help="gpuid on which the code should be run")
+    parser.add_argument('--vae_mse_weight', type=float, default=10,
+                        help="weight for the shape variational autoencoder(analysis) mse reconstruction term in the loss")
+    parser.add_argument('--latent_dim', type = int, default = 64,
+                        help="latent dimensions of the shape variational autoencoder")
+    args = parser.parse_args()
 	args = parser.parse_args()
 	os.environ["CUDA_VISIBLE_DEVICES"]=str(args.gpuid)
 	args.cuda = not args.no_cuda and torch.cuda.is_available()
