@@ -22,7 +22,7 @@ Each dataset should also contain the template point cloud in text format placed 
 ### Training and Testing
 ```
 python train_geodesic.py [--with appropriate tags]
-python test.py [--with appropriate tags]
+python test_geodesic.py [--with appropriate tags]
 ```
 
 #### Usage
