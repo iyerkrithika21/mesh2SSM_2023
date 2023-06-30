@@ -11,7 +11,7 @@ from mesh_vae import VAE
 from model_autoencoder import Mesh2SSM_AE
 import numpy as np
 from torch.utils.data import DataLoader
-from util import cal_loss, IOStream, prepare_logger, cd_loss_L1
+from utils import prepare_logger, cd_loss_L1
 import sklearn.metrics as metrics
 from chamfer_distance import ChamferDistance
 
@@ -29,7 +29,7 @@ def _init_():
     os.system('cp util.py checkpoints' + '/' + args.exp_name + '/' + 'util.py.backup')
     os.system('cp data.py checkpoints' + '/' + args.exp_name + '/' + 'data.py.backup')
 
-def train(args, io):
+def train(args):
     epochs_dir, log_fd, train_writer, val_writer = prepare_logger(args)
 
     training_data = MeshesWithFaces(directory = args.data_directory, extention=args.extention,k=args.k)
@@ -215,7 +215,7 @@ def train(args, io):
 if __name__ == "__main__":
     # Training settings
     parser = argparse.ArgumentParser(description='Mesh2SSM: From surface meshes to statistical shape models of anatomy')
-    parser.add_argument('--exp_name', type=str, default='exp', metavar='N',
+    parser.add_argument('--exp_name', type=str, default='exp', metavar='N',\
                         help='Name of the experiment')
     parser.add_argument('--dataset', type=str, default='modelnet40', metavar='N')
     parser.add_argument('--batch_size', type=int, default=10, metavar='batch_size',
@@ -236,8 +236,6 @@ if __name__ == "__main__":
                         help='enables CUDA training')
     parser.add_argument('--seed', type=int, default=42, metavar='S',
                         help='random seed (default: 42)')
-    parser.add_argument('--eval', type=bool,  default=False,
-                        help='evaluate the model')
     parser.add_argument('--dropout', type=float, default=0.5,
                         help='dropout rate')
     parser.add_argument('--emb_dims', type=int, default=128, metavar='N',
@@ -268,8 +266,7 @@ if __name__ == "__main__":
 
     _init_()
 
-    io = IOStream('checkpoints/' + args.exp_name + '/run.log')
-    io.cprint(str(args))
+    
     args.pred_dir = 'checkpoints/' + args.exp_name + "/output/"
     if not os.path.exists(args.pred_dir):
         os.makedirs(args.pred_dir)
@@ -281,16 +278,15 @@ if __name__ == "__main__":
     args.cuda = not args.no_cuda and torch.cuda.is_available()
     torch.manual_seed(args.seed)
     if args.cuda:
-        io.cprint(
+        print(
             'Using GPU : ' + str(torch.cuda.current_device()) + ' from ' + str(torch.cuda.device_count()) + ' devices')
         torch.cuda.manual_seed(args.seed)
     else:
-        io.cprint('Using CPU')
+        print('Using CPU')
 
-    if not args.eval:
-        train(args, io)
-    else:
-        test(args, io)
+    
+    train(args)
+    
 
 
 
