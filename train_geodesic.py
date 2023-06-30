@@ -214,7 +214,7 @@ def train(args, io):
 
 if __name__ == "__main__":
     # Training settings
-    parser = argparse.ArgumentParser(description='Point Cloud Recognition')
+    parser = argparse.ArgumentParser(description='Mesh2SSM: From surface meshes to statistical shape models of anatomy')
     parser.add_argument('--exp_name', type=str, default='exp', metavar='N',
                         help='Name of the experiment')
     parser.add_argument('--dataset', type=str, default='modelnet40', metavar='N',
@@ -286,3 +286,9 @@ if __name__ == "__main__":
         train(args, io)
     else:
         test(args, io)
+
+
+
+'''
+This repo reuses code from: https://github.com/WangYueFt/dgcnn/
+'''
