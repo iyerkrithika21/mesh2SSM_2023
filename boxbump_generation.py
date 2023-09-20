@@ -5,7 +5,10 @@ import pyvista as pv
 import shapeworks as sw
 import glob
 
-
+'''
+change the save_dir variable and the num_samples variable to generate train/test/val datasets
+In our experiments we used train/test/val split of 500/100/100
+'''
 
 save_dir = "box_bump_100_test/"
 if not os.path.exists(save_dir):
