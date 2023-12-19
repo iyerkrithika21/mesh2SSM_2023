@@ -80,10 +80,10 @@ All data will be made available online with a permissive copyright-license (CC-B
 To cite this data, please refer to https://arxiv.org/abs/1902.09063
 
 
-This dataset was pre-processing using ShapeWorks mesh grooming tools. 
+This dataset was pre-processed using ShapeWorks mesh grooming tools. 
 
 ### Acknowledgements
-If you use this pre-processed dataset in work that leads to published research, we humbly ask that you to cite ShapeWorks, add the following to the 'Acknowledgments' section of your paper:
+If you use this pre-processed dataset in work that leads to published research, we humbly ask that you cite ShapeWorks, and add the following to the 'Acknowledgments' section of your paper:
 "The National Institutes of Health supported this work under grant numbers NIBIB-U24EB029011, NIAMS-R01AR076120, NHLBI-R01HL135568, NIBIB-R01EB016701, and NIGMS-P41GM103545."
 and add the following 'disclaimer': "The content is solely the responsibility of the authors and does not necessarily represent the official views of the National Institutes of Health."
 
@@ -102,6 +102,6 @@ Joshua Cates, Shireen Elhabian, Ross Whitaker. "Shapeworks: particle-based shape
 ```
 
 
-## Download the Dataset from ShapeWorks Cloud Portal
-Use the downlaod.py to download the dataset. Please make sure to create an account on https://www.shapeworks-cloud.org/#/
+## Download the Dataset from the ShapeWorks Cloud Portal
+Use the downlaod.py to download the dataset. Please make sure to create an account at https://www.shapeworks-cloud.org/#/
 to download the dataset. 
