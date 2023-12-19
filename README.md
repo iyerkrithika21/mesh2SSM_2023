@@ -6,7 +6,7 @@ Please cite this paper if you use the code.
 
 ## Running the code
 
-### Dataset
+### Dataset Structure
 Arrange the input meshes in three folders - `train, test, val`
 These meshes need to be pre-processed, i.e., centered, aligned, smoothed, and should roughly contain the same number of vertices and edges. 
 Each dataset should also contain the template point cloud in text format placed outside of the train, test, and val folders. Example template file format where we have the x,y,z position of the point, and each row is a correspondence point. 
@@ -70,3 +70,38 @@ arguments:
   --latent_dim LATENT_DIM
                         latent dimensions of the shape variational autoencoder
 ```
+
+## Med Decathalon Dataset: Pancreas 
+
+From the website: http://medicaldecathlon.com/
+All data will be made available online with a permissive copyright-license (CC-BY-SA 4.0), allowing for data to be shared, distributed and improved upon. All data has been labeled and verified by an expert human rater, and with the best effort to mimic the accuracy required for clinical use. 
+
+### Citation for Pancreas Dataset
+To cite this data, please refer to https://arxiv.org/abs/1902.09063
+
+
+This dataset was pre-processing using ShapeWorks mesh grooming tools. 
+
+### Acknowledgements
+If you use this pre-processed dataset in work that leads to published research, we humbly ask that you to cite ShapeWorks, add the following to the 'Acknowledgments' section of your paper:
+"The National Institutes of Health supported this work under grant numbers NIBIB-U24EB029011, NIAMS-R01AR076120, NHLBI-R01HL135568, NIBIB-R01EB016701, and NIGMS-P41GM103545."
+and add the following 'disclaimer': "The content is solely the responsibility of the authors and does not necessarily represent the official views of the National Institutes of Health."
+
+### Citation for ShapeWorks
+When referencing this dataset groomed with ShapeWorks, please include a bibliographical reference to the paper below, and, if possible, include a link to shapeworks.sci.utah.edu.
+Joshua Cates, Shireen Elhabian, Ross Whitaker. "Shapeworks: particle-based shape correspondence and visualization software." Statistical Shape and Deformation Analysis. Academic Press, 2017. 257-298.
+```
+    @incollection{cates2017shapeworks,
+    title = {Shapeworks: particle-based shape correspondence and visualization software},
+    author = {Cates, Joshua and Elhabian, Shireen and Whitaker, Ross},
+    booktitle = {Statistical Shape and Deformation Analysis},
+    pages = {257--298},
+    year = {2017},
+    publisher = {Elsevier}
+    }
+```
+
+
+## Download the Dataset from ShapeWorks Cloud Portal
+Use the downlaod.py to download the dataset. Please make sure to create an account on https://www.shapeworks-cloud.org/#/
+to download the dataset. 
